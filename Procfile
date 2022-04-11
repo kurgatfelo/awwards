@@ -1,1 +1,1 @@
-web: gunicorn awwardpage.wsgi --log-file -
+web: gunicorn awwards.wsgi --log-file -
