@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+    .panel {
+        border: none;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default" style="margin-top:5%">
+                <img class="card-img-top mb-10 img-responsive" src="{{project.project_image.url}}"
+                    style="height:auto;width:100%">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p> <span style="font-weight: 700;">Title : </span> {{project.title}} </p>
+                            <p>
+                                <span style="font-weight: 700;">Description : </span> {{ project.description }}
+                            </p>
+                            <p><a href="{{project.url}}" class="text-right" style="text-decoration: none;">
+                                    view hosted site
+                                </a></p>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2 class="mt-4">Review Rate</h2>
+            {% if rating_status %}
+            <h5>You have already done your review</h5>
+            {% else %}
+            {% if user.is_authenticated %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button class="btn btn-sm btn-info btn-block" style="margin-top:4px;" value="review"
+                    type="submit">Rate</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-md-8">
+        <h3 class="text-center">Scores</h3>
+        {% for reviews in reviews %}
+       <!-- ==reviews.project.id -->
+            {% if project.id == reviews.post.id%}
+            <div class="row">
+                <div class="col"><h4>{{ reviews.content }}</h4></div>
+                <div class="col"> <h4>{{ reviews.usability }}</h4></div>
+                <div class="col"><h4>{{ reviews.design }}</h4></div>
+                <div class="col"> <h4>{{ reviews.average }}</h4></div>
+                <div class="col"><h4>{{ reviews.user.username }}</h4></div>
+              </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="col-md-2"></div>
+    </div>
+    {% endblock %}
