@@ -4,13 +4,16 @@ from .forms import NewPostForm,RatingsForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import UserSerializer,ProfileSerializer,PostSerializer
+from django.contrib.auth.decorators import login_required
 from rest_framework import status
 from django.urls import reverse
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def homepage(request):
     message='WELCOME TO AWWWARDS'
     projects=Post.objects.all()
     return render(request,'homepage.html',{'message':message,'projects':projects})
+@login_required(login_url='/accounts/login/')
 def more_on_pic(request,id):
     project = Post.objects.get(id=id)
     rate = Rates.objects.filter(user=request.user, post=project).first()
@@ -49,6 +52,7 @@ def more_on_pic(request,id):
 
     # rates=Ratings.objects.filter(Post=id)
     return render(request, 'moreabout.html', { 'more_on_pic': more_on_pic,'message':message})
+@login_required(login_url='/accounts/login/')
 def profile(request):
     message='profile'
     current_user = request.user
@@ -115,7 +119,7 @@ class ProfileList(APIView):
     #     form = ratesForm()
     # return render(request, 'moreabout.html', {"form": form})
 
-
+@login_required(login_url='/accounts/login/')
 def new_post(request):
     current_user = request.user
     # profile = request.GET.get("profile")
@@ -137,9 +141,11 @@ def new_post(request):
 
     # message='place your post'
     # return render(request,'new_post.html',{'message':message})
+@login_required(login_url='/accounts/login/')
 def updateProfile(request):
     message='update your profile'
     return render(request,'updateProfile.html',{'message':message})
+@login_required(login_url='/accounts/login/')
 def search(request):
     # message='search here'
     # return render(request,'search.html',{'message':message})

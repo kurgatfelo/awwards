@@ -20,7 +20,7 @@ class ProfileTestCase(TestCase):
         profile = Profile.objects.all()
         self.assertTrue(len(profile) > 0)
 
-class ProjectTestClass(TestCase):
+class PostTestClass(TestCase):
     """
     test class for Image model unit tests.
     """
@@ -29,20 +29,20 @@ class ProjectTestClass(TestCase):
         self.new_profile = Profile(id=1, profile_pic='my_profile.jpg', bio='sample test for profile',
                                     user=self.user)
         self.new_profile.save()
-        self.new_project = Project(image='project_pic.png',title="Homepage",url='www.myproject.com', description='providing a test for project model', date='11/04/2021',
+        self.new_post = Post(image='project_pic.png',title="Homepage",url='www.myproject.com', description='providing a test for project model', date='11/04/2022',
         profile=self.new_profile)
 
     def test_instance_true(self):
         self.assertTrue(isinstance(self.new_project, Project))
 
     def test_save_project(self):
-        self.new_project.save_project()
-        prj = Project.objects.all()
+        self.new_post.save_project()
+        prj = Post.objects.all()
         self.assertTrue(len(prj) == 1)
 
     def test_delete_project(self):
-        self.new_project.save_project()
-        self.new_project.delete_project()
+        self.new_post.save_project()
+        self.new_post.delete_project()
         img = Profile.objects.all()
         self.assertTrue(len(img) <= 1)
 
@@ -58,9 +58,9 @@ class RatesTestCase(TestCase):
         self.user.save()
         self.new_profile = Profile(id = 1,profile_pic='my_profile.png',bio='sample test for profile',user=self.user)
         self.new_profile.save()
-        self.new_project = Project(image='project_pic.png',title="Landing page",url='www.myproject.com', description='providing a test for project model', date='21/10/2021',
+        self.new_post = Post(image='project_pic.png',title="Landing page",url='www.myproject.com', description='providing a test for project model', date='11/04/2022',
         profile=self.new_profile)
-        self.rate = Rates(design='Perfect',usability='Just wow!',content='Amazing',project = self.new_project, date="21-10-2021")
+        self.rate = Rates(design='Perfect',usability='Just wow!',content='Amazing',post = self.new_project, date="11-04-2022")
 
     def test_instance(self):
         self.assertTrue(isinstance(self.rate, Rates))
