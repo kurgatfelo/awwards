@@ -14,7 +14,7 @@
             <div class="panel panel-default" style="margin-top:5%">
                 <img class="card-img-top mb-10 img-responsive" src="{{project.project_image.url}}"
                     style="height:auto;width:100%">
-                
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
                             <p> <span style="font-weight: 700;">Title : </span> {{project.title}} </p>
@@ -55,7 +55,7 @@
        <!-- ==reviews.project.id -->
             {% if project.id == reviews.post.id%}
             <div class="row">
-                <div class="col"><h4>{{ reviews.content }}</h4></div>
+                
                 <div class="col"> <h4>{{ reviews.usability }}</h4></div>
                 <div class="col"><h4>{{ reviews.design }}</h4></div>
                 <div class="col"> <h4>{{ reviews.average }}</h4></div>
