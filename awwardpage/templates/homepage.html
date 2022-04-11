@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+{%load bootstrap4}
+{%block content%}
+<style>
+.container-fluid h2{
+  
+    text-align: center;
+    color: blue;
+    padding-top: 40px;
+}
+/* .images img{
+width: 300px;
+height: 300px;
+} */
+.back{
+    
+    height: 350px;
+    width: 350px;
+    margin-top: 50px;
+}
+</style>
+<div class="container-fluid"  >
+  <h2> {{message}}</h2> 
+    <div class="row">
+        {%if projects%}
+       
+
+    {%for project in projects%}
+      <div class="col-sm-4" style="color: red;">
+        <div class="back">
+        <h2 style="color: red;">{{project.title}}</h2>
+       
+        <a  href="{% url 'more' project.id %}">  <img style="height: 300px;width: 280px;background-color: grey;margin-left: 30px;" src="{{project.project_image.url}}" alt="image" ></a>
+        <p style="color:blue ;">{{project.description}}</p>
+        </div>
+      </div>
+      {%endfor%}
+
+    {%else%}
+     you have no posts
+    {%endif%}
+    </div>
+  </div>
+
+{%endblock%}
