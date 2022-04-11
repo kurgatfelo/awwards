@@ -16,12 +16,13 @@
     {% block styles %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  
+    {% endblock %}
+
 </head>
 
 <body>
 
-    {% include "navbar.html" %}
+   
 
     {% block content %}
     <h1 class='text-center'>AWWARDS PAGE</h1>
